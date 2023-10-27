@@ -20,7 +20,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1  # Set your AWS region here
 
-      - name: Deploy to S3
+      - name: Copy specific files to S3
         run: |
-          aws s3 cp index.html . s3://cloudresume-pt2/index.html
-          aws s3 cp styles.css . s3://cloudresume-pt2/styles.css  
+          aws s3 cp ./index.html . s3://cloudresume-pt2/index.html
+          aws s3 cp ./styles.css . s3://cloudresume-pt2/styles.css  
