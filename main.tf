@@ -1,3 +1,17 @@
+terraform {
+  required_providers {
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 2.0" # You can specify a version constraint if needed.
+    }
+  }
+}
+
+provider "cloudflare" {
+  email   = var.cloudflare_email
+  api_key = var.cloudflare_api_key
+}
+
 provider "aws" {
   region = "us-west-1" # Adjust the region as per your requirements.
 }
@@ -141,4 +155,13 @@ resource "aws_cloudfront_distribution" "cloudresume_distribution" {
 # Output the CloudFront distribution's domain name (URL)
 output "cloudfront_distribution_url" {
   value = aws_cloudfront_distribution.cloudresume_distribution.domain_name
+}
+
+resource "cloudflare_record" "resume_domain" {
+  zone_id = "your_zone_id"
+  name    = "resume.3lack.co"
+  value   = aws_cloudfront_distribution.cloudresume_distribution.domain_name
+  type    = "CNAME"
+  ttl     = 1
+  proxied = false
 }
