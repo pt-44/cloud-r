@@ -21,4 +21,6 @@ jobs:
           aws-region: us-east-1  # Set your AWS region here
 
       - name: Deploy to S3
-        run: aws s3 sync . s3://cloudresume-pt2/  # Replace 'your-bucket-name' with your S3 bucket name
+        run: |
+          aws s3 cp index.html . s3://cloudresume-pt2/ 
+          aws s3 cp styles.css . s3://cloudresume-pt2/  
