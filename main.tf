@@ -158,10 +158,13 @@ output "cloudfront_distribution_url" {
 }
 
 resource "cloudflare_record" "resume_domain" {
-  zone_id = "your_zone_id"
+  lifecycle {
+    create_before_destroy = true
+  }
+  zone_id = var.cloudflare_zone_id
   name    = "resume.3lack.co"
   value   = aws_cloudfront_distribution.cloudresume_distribution.domain_name
   type    = "CNAME"
   ttl     = 1
-  proxied = false
+  proxied = true
 }

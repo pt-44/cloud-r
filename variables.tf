@@ -8,3 +8,8 @@ variable "cloudflare_api_key" {
   type        = string
   sensitive   = true  # This ensures Terraform does not print this value in logs or outputs.
 }
+
+variable "cloudflare_zone_id" {
+  description = "CloudFlare Zone ID"
+  type        = string
+}
